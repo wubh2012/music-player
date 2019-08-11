@@ -2,9 +2,7 @@ const path = require('path');
 const APPDIR = 'src/';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {
-  CleanWebpackPlugin
-} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: path.resolve(__dirname, APPDIR, 'index.html'),
   filename: 'index.html',
@@ -38,7 +36,23 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: [
-          'file-loader'
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'img/'
+            }
+          }          
+        ]
+      },
+      {
+        test: /\.(ogg|mp3|wav|mpe)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'songs/'
+            }
+          }          
         ]
       }
     ]

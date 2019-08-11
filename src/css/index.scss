@@ -6,76 +6,100 @@ $color2-dark: darken($color2, 10%);
 $color2-darker: darken($color2, 30%);
 $color3: #0025f1;
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 .icon {
-  width: 1em; height: 1em;
+  width: 1em;
+  height: 1em;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
 }
-#musicplayer{
+
+#musicplayer {
   display: flex;
   flex-direction: column;
   height: 100vh;
   background: $backgroundColor;
-  .header{
+
+  >.header {
     height: 50px;
     text-align: center;
-    h1{
+
+    h1 {
       font-size: 20px;
       color: $textcolor1;
     }
-    p{
+
+    p {
       margin-top: 8px;
       font-size: 12px;
       color: $textcolor2;
     }
   }
-  .main{
+
+  .main {
     position: relative;
-    display: flex;    
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     flex: 1;
-    @media screen and (max-width: 480px){
+
+    @media screen and (max-width: 480px) {
       flex: unset;
       height: calc(100vh - 230px);
     }
-    .effects{
+
+    .effects {
       position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
       width: 300px;
       height: 300px;
+
       >div {
         position: absolute;
         background-size: contain;
       }
-      .effect-1{
+
+      .effect-1 {
         width: 100%;
         height: 100%;
         background: url(../img/effect-no-move.svg) 0 0 no-repeat;
       }
-      .effect-2{
+
+      .effect-2 {
         width: 80%;
         height: 80%;
         background: url(../img/effect-move1.svg) 0 0 no-repeat;
         animation: rotate 5s linear infinite;
+        animation-play-state: paused;
       }
-      .effect-3{
+
+      .effect-3 {
         width: 20%;
         height: 20%;
         background: url(../img/effect-move2.svg) 0 0 no-repeat;
         animation: rotate 5s linear infinite reverse;
+        animation-play-state: paused;
+      }
+
+      &.active {
+
+        .effect-2,
+        .effect-3 {
+          animation-play-state: running;
+        }
       }
     }
-    .buttons{
+
+    .buttons {
       position: absolute;
       left: 0;
       bottom: 0;
@@ -83,44 +107,52 @@ $color3: #0025f1;
       justify-content: space-around;
       align-items: center;
       width: 100%;
-      svg{
+
+      svg {
         width: 24px;
         height: 24px;
       }
     }
   }
-  .footer{
+
+  .footer {
     display: flex;
     flex-direction: column;
     height: 100px;
     padding-top: 16px;
-    .processbar{
+
+    .processbar {
       display: flex;
       align-items: center;
       padding: 0 10px;
-      .time-start, .time-end{
+
+      .time-start,
+      .time-end {
         width: 40px;
         color: $textcolor2;
         font-size: 12px;
-      }      
-      .bar{
+      }
+
+      .bar {
         flex: 1;
         height: 4px;
         margin: 0 10px;
         border-radius: 2px;
         background: $color3;
-        .progress{
+
+        .progress {
           position: relative;
           width: 0%;
           height: 100%;
           border-radius: 2px;
           background: $color2;
           transition: all .2s;
-          &::after{
+
+          &::after {
             content: '';
             position: absolute;
             top: -5px;
-            left: 0px;
+            right: 0px;
             display: block;
             width: 14px;
             height: 14px;
@@ -130,29 +162,91 @@ $color3: #0025f1;
         }
       }
     }
-    .actions{
+
+    .actions {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 18px 20px 0;
-  
+
       svg {
         width: 28px;
         height: 28px;
-  
+
         &.btn-play-pause {
           width: 50px;
-          height: 50px;       
+          height: 50px;
         }
       }
-    }    
+    }
+
+    .musiclist {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background: $textcolor1;
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+      overflow: hidden;
+      transition: all .3s;
+      transform: translateY(100%);
+      .panel-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 10px;
+        border-bottom: 1px solid #eee;
+        font-size: 16px;
+        .close{
+          cursor: pointer;
+        }
+      }
+      .panel-body {
+        height: 200px;
+        margin-bottom: 20px;
+        ul {
+          height: 100%;
+          overflow-x: hidden;
+          overflow-y: auto;
+
+          li {
+            padding: 10px;
+            .songName {
+              font-size: 16px;
+            }
+            .author {
+              font-size: 10px;
+              color: $textcolor2;
+            }
+
+            &.active {
+              color: red;
+
+              .author {
+                color: inherit;
+              }
+
+              &::before {
+                content: '🔊';
+              }
+            }
+          }
+        }
+      }
+      &.active{
+        // display: block;
+        transform: translateY(0%);
+      }
+    }
   }
 }
-@keyframes rotate{
-  0%{
+
+@keyframes rotate {
+  0% {
     transform: rotate(0);
   }
-  100%{
+
+  100% {
     transform: rotate(360deg);
   }
 }

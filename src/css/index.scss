@@ -1,0 +1,31 @@
+$backgroundColor: #060a3d;
+$textcolor1: #fff;
+$textcolor2: #868aaf;
+$color2: #db3baa;
+$color2-dark: darken($color2, 10%);
+$color2-darker: darken($color2, 30%);
+$color3: #0025f1;
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#musicplayer{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: $backgroundColor;
+  .header{
+    text-align: center;
+    h1{
+      font-size: 20px;
+      color: $textcolor1;
+    }
+    p{
+      margin-top: 8px;
+      font-size: 12px;
+      color: $textcolor2;
+    }
+  }
+}

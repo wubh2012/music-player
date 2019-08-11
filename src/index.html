@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>音乐播放器</title>
+  <link rel="shortcut icon" href="https://s1.music.126.net/style/favicon.ico?v20180823">
 </head>
 <body>
   <div id="musicplayer">
@@ -12,12 +13,34 @@
       <h1>青花瓷</h1>
       <p>周杰伦-我很忙33</p>
     </div>
-    <div class="main">22</div>
+    <div class="main">
+      <div class="effects">
+        <div class="effect-1"></div>
+        <div class="effect-2"></div>
+        <div class="effect-3"></div>
+      </div>
+      <div class="buttons">
+        <svg class="btn-like" xmlns:xlink="http://www.w3.org/1999/xlink"  aria-hidden="true"><use xlink:href="#icon-like"/></svg>
+        <svg class="btn-download" xmlns:xlink="http://www.w3.org/1999/xlink"  aria-hidden="true"><use xlink:href="#icon-download"/></svg>
+        <svg class="btn-share" xmlns:xlink="http://www.w3.org/1999/xlink"  aria-hidden="true"><use xlink:href="#icon-share"/></svg>
+        <svg class="btn-comment" xmlns:xlink="http://www.w3.org/1999/xlink"  aria-hidden="true"><use xlink:href="#icon-comment"/></svg>
+      </div>      
+    </div>
     <div class="footer">
-      <button>上一个</button>
-      <button>下一个</button>
-      <button>下一个333</button>
-      <button>下一个333</button>
+      <div class="processbar">
+          <span class="time-start">00:00</span>
+          <div class="bar">
+            <div class="progress"></div>
+          </div>
+          <span class="time-end">00:00</span>
+      </div>
+      <div class="actions">
+        <svg class="icon btn-order" xmlns:xlink="http://www.w3.org/1999/xlink"  aria-hidden="true"><use xlink:href="#icon-circle"/></svg>
+        <svg class="icon btn-pre" xmlns:xlink="http://www.w3.org/1999/xlink"  aria-hidden="true"><use xlink:href="#icon-pre"/></svg>
+        <svg class="icon btn-play-pause pause" xmlns:xlink="http://www.w3.org/1999/xlink"  aria-hidden="true"><use xlink:href="#icon-play"/></svg>
+        <svg class="icon btn-next" xmlns:xlink="http://www.w3.org/1999/xlink"  aria-hidden="true"><use xlink:href="#icon-next"/></svg>
+        <svg class="icon btn-music-list" xmlns:xlink="http://www.w3.org/1999/xlink"  aria-hidden="true"><use xlink:href="#icon-list"/></svg>
+      </div>      
     </div>
   </div>
 </body>

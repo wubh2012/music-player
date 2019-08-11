@@ -1,5 +1,5 @@
-console.log('run');
-
 import '../css/index.scss'
+import './icons.js'
 
-console.log('go')
+
+

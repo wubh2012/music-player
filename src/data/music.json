@@ -1,0 +1,34 @@
+[ 
+  {
+      "id": "0",
+      "title": "栀子花开",
+      "author": "何炅",
+      "albumn": "可以爱",
+      "lyric": "",
+      "url": "00.mp3"
+  },
+  {
+    "id": "1",
+    "title": "生如夏花",
+    "author": "朴树",
+    "albumn": "生如夏花",
+    "lyric": "",
+    "url": "01.mp3"
+  },
+  {
+    "id": "2",
+    "title": "沙漠骆驼",
+    "author": "展展与罗罗",
+    "albumn": "沙漠骆驼",
+    "lyric": "",
+    "url": "02.mp3"
+  },
+  {
+    "id": "3",
+    "title": "王妃",
+    "author": "萧敬腾",
+    "albumn": "王妃",
+    "lyric": "",
+    "url": "03.mp3"
+  }
+  ]

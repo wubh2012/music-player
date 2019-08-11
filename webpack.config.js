@@ -2,7 +2,9 @@ const path = require('path');
 const APPDIR = 'src/';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {
+  CleanWebpackPlugin
+} = require('clean-webpack-plugin');
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: path.resolve(__dirname, APPDIR, 'index.html'),
   filename: 'index.html',
@@ -15,7 +17,7 @@ module.exports = {
   entry: {
     index: './js/index.js',
   },
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   devServer: {
     contentBase: './dist',
     hot: true
@@ -26,13 +28,20 @@ module.exports = {
   },
   module: {
     rules: [{
-      test: /\.css|\.scss$/,
-      use: [
-        'style-loader',
-        'css-loader',
-        'sass-loader',
-      ]
-    }]
+        test: /\.css|\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+        ]
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'file-loader'
+        ]
+      }
+    ]
   },
   plugins: [
     new CleanWebpackPlugin(),

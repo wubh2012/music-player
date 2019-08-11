@@ -11,12 +11,19 @@ $color3: #0025f1;
   padding: 0;
   box-sizing: border-box;
 }
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 #musicplayer{
   display: flex;
   flex-direction: column;
   height: 100vh;
   background: $backgroundColor;
   .header{
+    height: 50px;
     text-align: center;
     h1{
       font-size: 20px;
@@ -29,11 +36,123 @@ $color3: #0025f1;
     }
   }
   .main{
-    height: 200px;
-    border: 1px solid red;
+    position: relative;
+    display: flex;    
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 1;
+    @media screen and (max-width: 480px){
+      flex: unset;
+      height: calc(100vh - 230px);
+    }
+    .effects{
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 300px;
+      height: 300px;
+      >div {
+        position: absolute;
+        background-size: contain;
+      }
+      .effect-1{
+        width: 100%;
+        height: 100%;
+        background: url(../img/effect-no-move.svg) 0 0 no-repeat;
+      }
+      .effect-2{
+        width: 80%;
+        height: 80%;
+        background: url(../img/effect-move1.svg) 0 0 no-repeat;
+        animation: rotate 5s linear infinite;
+      }
+      .effect-3{
+        width: 20%;
+        height: 20%;
+        background: url(../img/effect-move2.svg) 0 0 no-repeat;
+        animation: rotate 5s linear infinite reverse;
+      }
+    }
+    .buttons{
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      svg{
+        width: 24px;
+        height: 24px;
+      }
+    }
   }
   .footer{
-    height: 200px;
-    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    padding-top: 16px;
+    .processbar{
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      .time-start, .time-end{
+        width: 40px;
+        color: $textcolor2;
+        font-size: 12px;
+      }      
+      .bar{
+        flex: 1;
+        height: 4px;
+        margin: 0 10px;
+        border-radius: 2px;
+        background: $color3;
+        .progress{
+          position: relative;
+          width: 0%;
+          height: 100%;
+          border-radius: 2px;
+          background: $color2;
+          transition: all .2s;
+          &::after{
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 0px;
+            display: block;
+            width: 14px;
+            height: 14px;
+            background: url(../img/progress.svg) 0 0 no-repeat;
+            background-size: contain;
+          }
+        }
+      }
+    }
+    .actions{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px 0;
+  
+      svg {
+        width: 28px;
+        height: 28px;
+  
+        &.btn-play-pause {
+          width: 50px;
+          height: 50px;       
+        }
+      }
+    }    
+  }
+}
+@keyframes rotate{
+  0%{
+    transform: rotate(0);
+  }
+  100%{
+    transform: rotate(360deg);
   }
 }

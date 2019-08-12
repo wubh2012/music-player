@@ -216,6 +216,7 @@ $color3: #0025f1;
 
           li {
             padding: 10px;
+            cursor: default;
             .iconVoice{
               display: none;
             }
@@ -225,6 +226,9 @@ $color3: #0025f1;
             .author {
               font-size: 10px;
               color: $textcolor2;
+            }
+            &:hover{
+              background: rgba(0, 0, 0, .1);
             }
 
             &.active {

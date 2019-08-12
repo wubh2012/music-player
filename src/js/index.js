@@ -143,15 +143,21 @@ let bindEvent = function () {
     log('关闭');
     $('.footer>.musiclist').classList.remove('active');
   });
-  $('.footer>.musiclist').addEventListener('click', function(e){
+  $('.footer>.musiclist>.panel-body>ul').addEventListener('click', function(e){
     e.stopPropagation();
     let targetElement = e.target;
-    log(targetElement, targetElement.nodeType, targetElement.nodeName)
-    if(targetElement.nodeName === 'LI'){
-      log(targetElement.dataset.id)
-      currentIndex = parseInt(targetElement.dataset.id, 10);
-      loadSong()
+    
+    while(targetElement.nodeName !== 'LI'){
+      log(targetElement, targetElement.parentElement)
+      targetElement = targetElement.parentElement;
+      if(targetElement === null || targetElement.nodeName === 'UL'){
+        break;
+      }
     }
+    currentIndex = parseInt(targetElement.dataset.id, 10);
+    loadSong();
+    play();
+    
   })
   document.addEventListener('click', function(){
     log('body 关闭')

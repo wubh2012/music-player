@@ -1,5 +1,6 @@
 const path = require('path');
 const APPDIR = 'src/';
+const devMode = process.env.NODE_ENV !== 'production';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -8,10 +9,11 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   filename: 'index.html',
   inject: 'body'
 });
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   context: path.resolve(__dirname, APPDIR),
-  mode: 'development',
+  mode: 'production', // development, production
   entry: {
     index: './js/index.js',
   },
@@ -26,9 +28,14 @@ module.exports = {
   },
   module: {
     rules: [{
-        test: /\.css|\.scss$/,
+        test: /\.css|\.scss|\.sass$/,
         use: [
-          'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: devMode === 'development',
+            },
+          },
           'css-loader',
           'sass-loader',
         ]
@@ -59,6 +66,12 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    HTMLWebpackPluginConfig
+    HTMLWebpackPluginConfig,
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // all options are optional
+      filename: devMode ? '[name].css' : '[name].[hash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+    }),
   ],
 };

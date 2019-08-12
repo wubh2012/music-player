@@ -24,16 +24,16 @@ let initData = function () {
     <span class="author"> - ${item.author}</span>
   </li>`
   });
-  body.innerHTML = `<ul>${temphtml}</ul>`
+  body.innerHTML = `<ul>${temphtml}</ul>`;
 }
 
 console.log(musiclist)
 let formateTime = function (secondsTotal) {
-  let minutes = parseInt(secondsTotal / 60)
-  minutes = minutes >= 10 ? '' + minutes : '0' + minutes
-  let seconds = parseInt(secondsTotal % 60)
-  seconds = seconds >= 10 ? '' + seconds : '0' + seconds
-  return minutes + ':' + seconds
+  let minutes = parseInt(secondsTotal / 60);
+  minutes = minutes >= 10 ? '' + minutes : '0' + minutes;
+  let seconds = parseInt(secondsTotal % 60);
+  seconds = seconds >= 10 ? '' + seconds : '0' + seconds;
+  return minutes + ':' + seconds;
 }
 
 let currentIndex = 0;

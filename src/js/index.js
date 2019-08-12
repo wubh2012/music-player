@@ -19,7 +19,10 @@ let initData = function () {
   let body = $('.footer>.musiclist>.panel-body');
   let temphtml = ``;
   musiclist.forEach(item => {
-    temphtml+=`<li>
+    temphtml+=`<li data-id="${item.id}">
+    <span class="iconVoice">
+        <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"  aria-hidden="true"><use xlink:href="#icon-voice"/></svg>
+    </span>
     <span class="songName">${item.title}</span>
     <span class="author"> - ${item.author}</span>
   </li>`
@@ -36,6 +39,7 @@ let formateTime = function (secondsTotal) {
   return minutes + ':' + seconds;
 }
 
+let canplay = false;
 let currentIndex = 0;
 const audio = new Audio();
 
@@ -64,14 +68,24 @@ let initAudio = function () {
 
 let loadSong = function () {
   let music = musiclist[currentIndex];
+  
   $('.header h1').innerText = music.title;
   $('.header p').innerText = `${music.author} - ${music.albumn}`;
   audio.src = music.url;
+  Array.from($$('.musiclist li')).forEach((element, index)=>{
+    if(parseInt(element.dataset.id, 10) === currentIndex){
+      element.classList.add('active');
+    }else{
+      element.classList.remove('active');
+    }
+  })
 
 }
 
 let play = function () {
-  audio.play();
+  if(canplay){
+    audio.play();
+  }
 }
 
 let pause = function () {
@@ -101,13 +115,16 @@ let bindEvent = function () {
       element.classList.remove('playing');
       element.classList.add('pause');
       $('.main>.effects').classList.toggle('active');
+      canplay = false;
       pause();
     } else {
       element.classList.remove('pause');
       element.classList.add('playing');
       element.querySelector('use').setAttribute('xlink:href', '#icon-pause');
       $('.main>.effects').classList.toggle('active');
+      canplay = true;
       play();
+      
     }
   });
   $('.footer>.actions>.btn-pre').addEventListener('click', function (e) {
@@ -120,9 +137,24 @@ let bindEvent = function () {
     log('显示播放列表');
     // audio.currentTime += 10;
     $('.footer>.musiclist').classList.add('active');
+    e.stopPropagation();    
   });
   $('.footer>.musiclist>.panel-header>.close').addEventListener('click', function (e) {
     log('关闭');
+    $('.footer>.musiclist').classList.remove('active');
+  });
+  $('.footer>.musiclist').addEventListener('click', function(e){
+    e.stopPropagation();
+    let targetElement = e.target;
+    log(targetElement, targetElement.nodeType, targetElement.nodeName)
+    if(targetElement.nodeName === 'LI'){
+      log(targetElement.dataset.id)
+      currentIndex = parseInt(targetElement.dataset.id, 10);
+      loadSong()
+    }
+  })
+  document.addEventListener('click', function(){
+    log('body 关闭')
     $('.footer>.musiclist').classList.remove('active');
   });
 

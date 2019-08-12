@@ -197,8 +197,13 @@ $color3: #0025f1;
         padding: 15px 10px;
         border-bottom: 1px solid #eee;
         font-size: 16px;
+        svg{
+          width: 20px;
+          height: 20px;
+        }
         .close{
           cursor: pointer;
+          
         }
       }
       .panel-body {
@@ -211,6 +216,9 @@ $color3: #0025f1;
 
           li {
             padding: 10px;
+            .iconVoice{
+              display: none;
+            }
             .songName {
               font-size: 16px;
             }
@@ -220,22 +228,20 @@ $color3: #0025f1;
             }
 
             &.active {
-              color: red;
-
+              color: red;              
+              .iconVoice{
+                display: inline-block;
+              }
               .author {
                 color: inherit;
-              }
-
-              &::before {
-                content: '🔊';
-              }
+              }           
             }
           }
         }
       }
       &.active{
         // display: block;
-        transform: translateY(0%);
+        transform: translateY(0%);        
       }
     }
   }

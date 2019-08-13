@@ -1,6 +1,7 @@
 $backgroundColor: #060a3d;
 $textcolor1: #fff;
 $textcolor2: #868aaf;
+$textcolor3: #a3a3a3;
 $color2: #db3baa;
 $color2-dark: darken($color2, 10%);
 $color2-darker: darken($color2, 30%);
@@ -52,7 +53,7 @@ $color3: #0025f1;
 
     @media screen and (max-width: 480px) {
       flex: unset;
-      height: calc(100vh - 230px);
+      height: calc(100vh - 150px);
     }
 
     .effects {
@@ -225,7 +226,7 @@ $color3: #0025f1;
             }
             .author {
               font-size: 10px;
-              color: $textcolor2;
+              color: $textcolor3;
             }
             &:hover{
               background: rgba(0, 0, 0, .1);

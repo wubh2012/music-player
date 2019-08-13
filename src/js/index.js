@@ -96,9 +96,17 @@ class MusicPlayer{
   }
   playNext(){
     this.currentIndex += 1;
-    this.currentIndex = currentIndex % this.musiclist.length;
+    this.currentIndex = this.currentIndex % this.musiclist.length;
     this.loadSong();
     this.play();
+  }
+  closeMusicList(){
+    if($('.footer>.musiclist').classList.contains('active')){
+      $('.footer>.musiclist').classList.remove('active');
+    }
+  }
+  showMusicList(){
+    $('.footer>.musiclist').classList.add('active');
   }
   bindEvent(){
     let self = this;
@@ -128,13 +136,11 @@ class MusicPlayer{
       self.playNext();
     });
     $('.footer>.actions>.btn-music-list').addEventListener('click', (e)=> {
-      log('显示播放列表');
-      $('.footer>.musiclist').classList.add('active');
-      e.stopPropagation();    
+      e.stopPropagation(); 
+      self.showMusicList();
     });
     $('.footer>.musiclist>.panel-header>.close').addEventListener('click', (e)=> {
-      log('关闭');
-      $('.footer>.musiclist').classList.remove('active');
+      self.closeMusicList();
     });
     $('.footer>.musiclist>.panel-body>ul').addEventListener('click', (e)=>{
       e.stopPropagation();
@@ -150,11 +156,10 @@ class MusicPlayer{
       self.currentIndex = parseInt(targetElement.dataset.id, 10);
       self.loadSong();
       self.play();
-      
+      this.closeMusicList();
     })
     document.addEventListener('click', ()=>{
-      log('body 关闭');
-      $('.footer>.musiclist').classList.remove('active');
+      self.closeMusicList();
     });
   }
   formateTime(secondsTotal){
